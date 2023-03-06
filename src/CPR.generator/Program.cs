@@ -1,22 +1,26 @@
 using RandomNameGeneratorLibrary;
+using System.Text.Json;
+using System.Xml.Serialization;
 
-namespace HelloWorld
+namespace CPRGenerator
 {
+  public class Person {
+    public string Name { get; set; } = null!;
+    public string CprNo { get; set; } = null!;
+  }
+
   class Program
   {
-    public class Person {
-      public string Name { get; set; } = null!;
-      public string CprNo { get; set; } = null!;
-    }
-    
     static Random random = new Random();
     static PersonNameGenerator personGenerator = new PersonNameGenerator();
 
     static void Main(string[] args)
     {
       string input = Environment.GetEnvironmentVariable("LIMIT") ?? "";
-      int limit = 10;
-      if (input != null)
+      string format = Environment.GetEnvironmentVariable("FORMAT") ?? "";
+      int limit = 5;
+
+      if (input != "")
       {
         try
         {
@@ -30,16 +34,17 @@ namespace HelloWorld
 
       for(var i = 0; i < limit; i ++){
         System.Diagnostics.Debug.WriteLine(i);
-        GeneratePerson(i);
+        GeneratePerson(i, format);
       }
     }
 
-    private static void GeneratePerson(object state) {
+    public static void GeneratePerson(object state, string format)
+    {
       var person = new Person {
         Name = personGenerator.GenerateRandomFirstAndLastName(),
         CprNo = GenerateCprNo()
       };
-      DisplayPerson(person);
+      DisplayPerson(person, format);
     }
 
     private static string GenerateCprNo()
@@ -50,8 +55,26 @@ namespace HelloWorld
         return bday.ToString("ddMMyy") + "-" + seq.ToString();
     }
 
-    private static void DisplayPerson(Person obj) {
-      Console.WriteLine($"CPR: {obj.CprNo} Name: {obj.Name}");
+    private static void DisplayPerson(Person obj, string format)
+    {
+      switch (format)
+      {
+        case "plain":
+          Console.WriteLine($"CPR: {obj.CprNo} Name: {obj.Name}");
+          break;
+        case "csv":
+          Console.WriteLine($"{obj.CprNo},{obj.Name}");
+          break;
+        case "xml":
+          XmlSerializer x = new XmlSerializer(obj.GetType());
+          x.Serialize(Console.Out, obj);
+          Console.WriteLine();
+          break;
+        default:
+          string jsonString = JsonSerializer.Serialize(obj);
+          Console.WriteLine(jsonString);
+          break;
+      }
     }
   }
 }
