@@ -1,5 +1,6 @@
 services:
   app:
+    #image: ghcr.io/atrakic/dotnet-cpr-generator:latest
     build: src/CPR.generator
     environment:
       - FORMAT=csv

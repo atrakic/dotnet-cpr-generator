@@ -23,3 +23,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "CPR.generator.dll"]
+LABEL "dev.atrakic.dotnet-cpr-generator.dotnet.version"=$BASE_IMAGE_TAG

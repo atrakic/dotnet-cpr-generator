@@ -8,5 +8,14 @@ The console app generates a random CPR numbers (civil registration number).
 
 ## CPR Number
 
-> The CPR number consists of ten digits. 
-> The first six digits are your date of birth (day, month and year) while the last four digits provide a unique identification number for all citizens in Denmark. 
+> The CPR number consists of ten digits.
+> The first six digits are your date of birth (day, month and year) while the last four digits provide a unique identification number for all citizens in Denmark.
+
+
+## Usage
+
+```
+$ docker run -it --rm -e FORMAT=json \
+    -e LIMIT=100 ghcr.io/atrakic/dotnet-cpr-generator:latest
+
+```
