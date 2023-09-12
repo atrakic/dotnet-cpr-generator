@@ -12,7 +12,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  CONTEXT: src/CPR.Generator
+  CONTEXT: src/CPR.generator
 
 jobs:
   build-and-push-image:
