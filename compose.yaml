@@ -2,6 +2,7 @@ services:
   app:
     #image: ghcr.io/atrakic/dotnet-cpr-generator:latest
     build: src/CPR.generator
+    container_name: cpr-generator
     environment:
       - FORMAT=csv
       - LIMIT=22

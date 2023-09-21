@@ -19,8 +19,10 @@ RUN dotnet build "CPR.generator.csproj" -c Release -o /app/build
 FROM build-env AS publish
 RUN dotnet publish "CPR.generator.csproj" -c Release -o /app/publish
 
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/runtime:${BASE_IMAGE_TAG}-alpine AS final
+LABEL "dev.atrakic.dotnet-cpr-generator.dotnet.version"=$BASE_IMAGE_TAG
+LABEL maintainer="Admir Trakic <atrakic@users.noreply.github.com>"
 WORKDIR /app
 COPY --from=publish /app/publish .
+USER $APP_UID
 ENTRYPOINT ["dotnet", "CPR.generator.dll"]
-LABEL "dev.atrakic.dotnet-cpr-generator.dotnet.version"=$BASE_IMAGE_TAG
