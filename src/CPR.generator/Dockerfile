@@ -6,12 +6,12 @@ ARG BASE_IMAGE_BUILD=dotnet/sdk
 ARG BASE_IMAGE_RUNTIME=dotnet/runtime
 
 # Setup Base Image
-FROM ${BASE_IMAGE_REPO}/${BASE_IMAGE_RUNTIME}:${BASE_IMAGE_TAG} as base
+FROM ${BASE_IMAGE_REPO}/${BASE_IMAGE_BUILD}:${BASE_IMAGE_TAG} as base
 WORKDIR /app
 
-FROM base as build-env
-COPY . /src
+FROM base AS build-env
 WORKDIR /src
+COPY . /src
 RUN dotnet build "CPR.generator.csproj" -c Release -o /app/build
 
 FROM build-env AS publish
