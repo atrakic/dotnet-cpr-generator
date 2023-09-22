@@ -79,7 +79,7 @@ namespace CPRGenerator
                     Console.WriteLine(jsonString);
                     break;
                 default:
-                    obj.Dump();
+                    obj?.Dump();
                     break;
             }
         }

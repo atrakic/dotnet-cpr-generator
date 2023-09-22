@@ -7,7 +7,7 @@ all:
 	FORMAT=notfound dotnet run --project src/CPR.generator
 
 docker-test:
-	docker-compose up --build --no-deps --remove-orphans
+	docker-compose up --build --force-recreate --remove-orphans
 	docker-compose down --remove-orphans -v
 
 clean:
