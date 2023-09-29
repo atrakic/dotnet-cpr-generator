@@ -2,8 +2,9 @@
 
 [![ci](https://github.com/atrakic/dotnet-cpr-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/atrakic/dotnet-cpr-generator/actions/workflows/ci.yml)
 [![license](https://img.shields.io/github/license/atrakic/dotnet-cpr-generator.svg)](https://github.com/atrakic/dotnet-cpr-generator/blob/main/LICENSE)
+[![release](https://img.shields.io/github/release/atrakic/dotnet-cpr-generator/all.svg)](https://github.com/atrakic/dotnet-cpr-generator/releases)
 
-The console app generates a random Danish CPR numbers (civil registration number).
+The console app that generates a random Danish CPR numbers (civil registration number).
 
 
 ## Danish CPR Number
