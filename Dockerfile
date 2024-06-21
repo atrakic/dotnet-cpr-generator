@@ -14,7 +14,7 @@ COPY src/DkCprGenerator .
 RUN dotnet build "DkCprGenerator.csproj" -c Release -o /app/build
 
 FROM build-env AS publish
-RUN dotnet publish "DkCprGenerator.csproj" -c Release -o /app/publish
+RUN dotnet publish "DkCprGenerator.csproj" -c Release --no-restore -o /app/publish
 
 FROM ${BASE_IMAGE_REPO}/${BASE_IMAGE_RUNTIME}:${BASE_IMAGE_TAG}-alpine AS final
 WORKDIR /app
