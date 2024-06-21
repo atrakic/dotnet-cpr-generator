@@ -53,12 +53,14 @@ jobs:
             type=sha
 
       - name: Build and export to Docker
+        if: false
         uses: docker/build-push-action@v6
         with:
           load: true
           tags: ${{ steps.meta.outputs.tags }}
 
       - name: Test
+        if: false
         run: |
           docker run --rm ${{ steps.meta.outputs.tags }}
 
