@@ -4,10 +4,11 @@ name: Docker
 on:
   push:
     tags:
-      - 'v*.*.*'
-    branches:
-      - 'main'
-      - 'master'
+      - '*'
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["ci"]
+    types: [completed]
 
 env:
   REGISTRY: ghcr.io
@@ -15,7 +16,9 @@ env:
 
 jobs:
   build-and-push-image:
+
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
       contents: read
       packages: write
