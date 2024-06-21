@@ -1,8 +1,5 @@
 services:
   app:
-    #image: ghcr.io/atrakic/dotnet-cpr-generator:latest
-    build: src/CPR.generator
+    build: .
     container_name: cpr-generator
-    environment:
-      - FORMAT=csv
-      - LIMIT=22
+    command: --format plain --limit 5
