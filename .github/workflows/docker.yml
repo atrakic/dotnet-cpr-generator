@@ -12,7 +12,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  CONTEXT: .
 
 jobs:
   build-and-push-image:
@@ -53,11 +52,21 @@ jobs:
             type=semver,pattern={{major}}
             type=sha
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+      - name: Build and export to Docker
+        uses: docker/build-push-action@v6
         with:
-          context: ${{ env.CONTEXT }}
+          load: true
+          tags: ${{ steps.meta.outputs.tags }}
+
+      - name: Test
+        run: |
+          docker run --rm ${{ steps.meta.outputs.tags }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
           push: true
+          context: .
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
