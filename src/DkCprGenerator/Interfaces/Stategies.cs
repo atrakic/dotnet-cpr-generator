@@ -16,7 +16,7 @@ public class DefaultDisplayStrategy : IDisplayStrategy
 {
     public void Display(Person person)
     {
-        Console.WriteLine($"CPR: {person.CprNo} Name: {person.Name}");
+        Console.WriteLine($"Cpr: {person.Cpr} Name: {person.Name}");
     }
 }
 
@@ -24,7 +24,7 @@ public class CsvDisplayStrategy : IDisplayStrategy
 {
     public void Display(Person person)
     {
-        Console.WriteLine($"{person.CprNo},{person.Name}");
+        Console.WriteLine($"{person.Cpr},{person.Name}");
     }
 }
 
