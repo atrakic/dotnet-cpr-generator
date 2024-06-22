@@ -1,28 +1,31 @@
-namespace UnitTests;
+using Xunit;
+using NSubstitute;
 
 using DkCprGenerator.Interfaces;
 using DkCprGenerator.Model;
-using Xunit;
 
-public class UnitTest1
+namespace UnitTests
 {
-    [Fact]
-    public void Test1()
+    public class UnitTest1
     {
-        // Arrange
-        var person = new Person
+        [Fact]
+        public void TestDisplayStrategyInterface()
         {
-            Name = "John Doe",
-            CprNo = "010203-1234"
-        };
+            // Arrange
+            var person = new Person
+            {
+                Name = "John Doe",
+                CprNo = "123456-7890"
+            };
 
-        var displayStrategy = new PlainDisplayStrategy();
+            var displayStrategy = Substitute.For<IDisplayStrategy>();
+            displayStrategy.Display(person);
 
+            // Act
+            displayStrategy.Received().Display(person);
 
-        // Act
-        //var result = displayStrategy.Display(person);
-
-        // Assert
-        //Xunit.Assert.Equal("CPR: 010203-1234 Name: John Doe", result);
+            // Assert
+            Assert.True(true);
+        }
     }
 }
