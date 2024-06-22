@@ -1,10 +1,9 @@
-# https://hub.docker.com/_/microsoft-dotnet
-ARG BASE_IMAGE_TAG=8.0
-ARG BASE_IMAGE_REPO=mcr.microsoft.com
-ARG BASE_IMAGE_BUILD=dotnet/sdk
-ARG BASE_IMAGE_RUNTIME=dotnet/runtime
+# syntax=docker/dockerfile:1
+ARG IMAGE_TAG=8.0
+ARG IMAGE_BUILD=dotnet/sdk
+ARG IMAGE_RUNTIME=dotnet/runtime
 
-FROM --platform=$BUILDPLATFORM ${BASE_IMAGE_REPO}/${BASE_IMAGE_BUILD}:${BASE_IMAGE_TAG} as base
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/${IMAGE_BUILD}:${IMAGE_TAG} as base
 ARG TARGETARCH
 WORKDIR /src
 
@@ -15,7 +14,7 @@ RUN dotnet restore -a $TARGETARCH
 FROM build-env AS publish
 RUN dotnet publish -a $TARGETARCH --no-restore -o /app/publish
 
-FROM ${BASE_IMAGE_REPO}/${BASE_IMAGE_RUNTIME}:${BASE_IMAGE_TAG}-alpine AS final
+FROM mcr.microsoft.com/${IMAGE_RUNTIME}:${IMAGE_TAG}-alpine AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 USER $APP_UID
