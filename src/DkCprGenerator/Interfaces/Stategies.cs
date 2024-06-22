@@ -12,7 +12,7 @@ public interface IDisplayStrategy
     void Display(Person person);
 }
 
-public class PlainDisplayStrategy : IDisplayStrategy
+public class DefaultDisplayStrategy : IDisplayStrategy
 {
     public void Display(Person person)
     {
@@ -47,7 +47,7 @@ public class JsonDisplayStrategy : IDisplayStrategy
     }
 }
 
-public class DefaultDisplayStrategy : IDisplayStrategy
+public class DumpDisplayStrategy : IDisplayStrategy
 {
     public void Display(Person person)
     {
