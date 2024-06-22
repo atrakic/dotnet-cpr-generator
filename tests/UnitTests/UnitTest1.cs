@@ -15,7 +15,7 @@ namespace UnitTests
             var person = new Person
             {
                 Name = "John Doe",
-                CprNo = "123456-7890"
+                Cpr = "123456-7890"
             };
 
             var displayStrategy = Substitute.For<IDisplayStrategy>();
