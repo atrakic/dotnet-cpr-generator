@@ -16,12 +16,23 @@ The console app that generates a random Danish CPR numbers (civil registration n
 ## Usage
 
 
+- Cli
+
 ```
 DkCprGenerator -- --help
 ```
 
+- Docker:
 ```bash
 $ docker run -it --rm \
-    ghcr.io/atrakic/dotnet-cpr-generator:latest \
-    -- --format json -- --format plain --limit 5
+    ghcr.io/atrakic/dotnet-cpr-generator:latest --help
+
+$ docker run -it --rm \
+    ghcr.io/atrakic/dotnet-cpr-generator:latest --format plain --count 5
+
+$ docker run -it --rm \
+    ghcr.io/atrakic/dotnet-cpr-generator:latest --format json --count 5
+
+$ docker run -it --rm \
+    ghcr.io/atrakic/dotnet-cpr-generator:latest --format csv --count 5
 ```
